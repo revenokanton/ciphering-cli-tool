@@ -1,21 +1,13 @@
 const stream = require("stream");
 
-module.exports = class UpperCaseTransformer extends stream.Transform {
-  constructor(transformSteps) {
+module.exports = class CryptoTransformStream extends stream.Transform {
+  constructor(transformer) {
     super();
-    this.transformSteps = transformSteps;
+    this.func = transformer;
   }
 
   _transform(data, encoding, callback) {
-    this.push(this.chunkData(data.toString()));
+    this.push(this.func(data.toString()));
     callback();
-  }
-
-  chunkData(data) {
-    let chunk = data;
-    this.transformSteps.forEach((transformFunc) => {
-      chunk = transformFunc(chunk);
-    });
-    return chunk;
   }
 };
