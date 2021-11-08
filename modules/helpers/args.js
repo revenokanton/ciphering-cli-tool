@@ -1,25 +1,4 @@
-const fs = require("fs");
-
-// CLI args
-const CONFIG = ["-c", "--config"];
-const INPUT_FILE = ["-i", "--input"];
-const OUTPUT_FILE = ["-o", "--output"];
-
-// Obtain the console arguments
-const args = process.argv.slice(2);
-
-/**
- * Handle error as follows: we write the error message in process.stderr and
- * stop the process with code 1.
- *
- * @param err - Error object, which describe occurred error.
- */
-const errorHandler = (err) => {
-  if (err) {
-    process.stderr.write(err.message + "\n");
-    process.exit(1);
-  }
-};
+const { CONFIG, INPUT_FILE, OUTPUT_FILE, ARGS } = require("../constants");
 
 /**
  * Return parsed parameter from using provided args
@@ -29,7 +8,7 @@ const errorHandler = (err) => {
  * @returns {*} - Arg parameter value or null
  */
 const getValueFromArgs = (argNames) => {
-  const configIndex = args.findIndex(
+  const configIndex = ARGS.findIndex(
     (i) => i === argNames[0] || i === argNames[1]
   );
 
@@ -37,7 +16,7 @@ const getValueFromArgs = (argNames) => {
     return null;
   }
 
-  return args[configIndex + 1] ? args[configIndex + 1] : null;
+  return ARGS[configIndex + 1] ? ARGS[configIndex + 1] : null;
 };
 
 /**
@@ -70,62 +49,7 @@ const getOutputFile = () => {
   return getValueFromArgs(OUTPUT_FILE);
 };
 
-/**
- * Checking if config pattern is valid
- */
-const checkConfigPatter = (configValue) => {
-  const steps = configValue.split("-");
-  const patterns = ["C0", "C1", "R0", "R1", "A"];
-  steps.forEach((step) => {
-    if (!patterns.includes(step)) {
-      errorHandler(new Error("There are invalid config properties"));
-    }
-  });
-};
-
-/**
- * Checking if there are any multiplied arguments
- */
-const checkMultipleArgs = (argNames) => {
-  if (args.filter((item) => argNames.includes(item)).length > 1) {
-    errorHandler(new Error(`There are multiple ${argNames[1]} arguments`));
-  }
-};
-
-/**
- * Checking of the console arguments
- */
-const validateArgs = () => {
-  const configValue = getConfig();
-  if (configValue) {
-    checkConfigPatter(configValue);
-  } else {
-    errorHandler(
-      new Error("There is no the following required argument: --config")
-    );
-  }
-
-  const inputFile = getInputFile();
-
-  if (inputFile) {
-    fs.access(inputFile, fs.constants.R_OK, (err) => errorHandler(err));
-  }
-
-  const outputFile = getOutputFile();
-
-  if (outputFile) {
-    fs.access(outputFile, fs.constants.W_OK, (err) => errorHandler(err));
-  }
-
-  const arr = [CONFIG, OUTPUT_FILE, INPUT_FILE];
-
-  arr.forEach((argNames) => {
-    checkMultipleArgs(argNames);
-  });
-};
-
 module.exports = {
-  validateArgs,
   getConfig,
   getInputFile,
   getOutputFile,
