@@ -1,7 +1,3 @@
-// cipher.js
-const fromCode = (n) => String.fromCharCode(n);
-const toCode = (s) => s.charCodeAt(0);
-
 const cipher = (encode, decode) => ({ encode, decode });
 
 const atbash = cipher(
@@ -29,17 +25,20 @@ const filter = (alg) => (n) => {
 
 const period = (z, n) => (z + (n % z)) % z;
 
+const fromCode = (n) => String.fromCharCode(n);
+const toCode = (s) => s.charCodeAt(0);
+
+const composeL =
+  (...fs) =>
+  (x) =>
+    fs.reduce((r, f) => f(r), x);
+
 const transform = (f, s) =>
   Array.from(s, composeL(toCode, filter(f), fromCode)).join("");
 
 const encode = (alg, s) => transform(alg.encode, s);
 
 const decode = (alg, s) => transform(alg.decode, s);
-
-const composeL =
-  (...fs) =>
-  (x) =>
-    fs.reduce((r, f) => f(r), x);
 
 module.exports = {
   caesar,
