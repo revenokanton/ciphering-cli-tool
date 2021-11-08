@@ -71,6 +71,19 @@ const getOutputFile = () => {
 };
 
 /**
+ * Checking if config pattern is valid
+ */
+const checkConfigPatter = (configValue) => {
+  const steps = configValue.split("-");
+  const patterns = ["C0", "C1", "R0", "R1", "A"];
+  steps.forEach((step) => {
+    if (!patterns.includes(step)) {
+      errorHandler(new Error("There are invalid config properties"));
+    }
+  });
+};
+
+/**
  * Checking if there are any multiplied arguments
  */
 const checkMultipleArgs = (argNames) => {
@@ -83,17 +96,14 @@ const checkMultipleArgs = (argNames) => {
  * Checking of the console arguments
  */
 const validateArgs = () => {
-  if (!getConfig()) {
+  const configValue = getConfig();
+  if (configValue) {
+    checkConfigPatter(configValue);
+  } else {
     errorHandler(
       new Error("There is no the following required argument: --config")
     );
   }
-
-  const arr = [CONFIG, OUTPUT_FILE, INPUT_FILE];
-
-  arr.forEach((argNames) => {
-    checkMultipleArgs(argNames);
-  });
 
   const inputFile = getInputFile();
 
@@ -106,6 +116,12 @@ const validateArgs = () => {
   if (outputFile) {
     fs.access(outputFile, fs.constants.W_OK, (err) => errorHandler(err));
   }
+
+  const arr = [CONFIG, OUTPUT_FILE, INPUT_FILE];
+
+  arr.forEach((argNames) => {
+    checkMultipleArgs(argNames);
+  });
 };
 
 module.exports = {
