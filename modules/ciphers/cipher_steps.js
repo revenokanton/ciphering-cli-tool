@@ -17,16 +17,12 @@ const getTransformSteps = () => {
   };
 
   config.forEach((step) => {
-    let transformFunc;
-    if (parseInt(step.charAt(1), 10) === 1) {
-      transformFunc = (data) => {
-        return encode(CIPHERS[step.charAt(0)], data);
-      };
-    } else {
-      transformFunc = (data) => {
-        return decode(CIPHERS[step.charAt(0)], data);
-      };
-    }
+    const algorithm = CIPHERS[step.charAt(0)];
+    const transformFunc =
+      parseInt(step.charAt(1), 10) === 1
+        ? (data) => encode(algorithm, data)
+        : (data) => decode(algorithm, data);
+
     transformSteps.push(transformFunc);
   });
 
