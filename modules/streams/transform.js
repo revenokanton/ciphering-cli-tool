@@ -13,9 +13,8 @@ module.exports = class UpperCaseTransformer extends stream.Transform {
 
   chunkData(data) {
     let chunk = data;
-    this.transformSteps.forEach((step) => {
-      chunk = step.cypherFunc(chunk, step.mode);
-      console.log(chunk);
+    this.transformSteps.forEach((transformFunc) => {
+      chunk = transformFunc(chunk);
     });
     return chunk;
   }

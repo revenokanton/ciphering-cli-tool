@@ -1,8 +1,5 @@
 const { getConfig } = require("../helpers/args");
-const cesarCipher = require("./cesar");
-const rot8Cipher = require("./rot");
-const atbashCipher = require("./atbash");
-const { ENCRYPT, DECRYPT } = require("../constants");
+const { caesar, rot8, atbash, encode, decode } = require("./cipher");
 
 /**
  * Return parsed config args
@@ -14,21 +11,23 @@ const getTransformSteps = () => {
   const transformSteps = [];
 
   const CIPHERS = {
-    C: cesarCipher,
-    R: rot8Cipher,
-    A: atbashCipher,
+    C: caesar(1),
+    R: rot8,
+    A: atbash,
   };
 
   config.forEach((step) => {
-    const transformStep = {
-      cypherFunc: CIPHERS[step.charAt(0)],
-    };
-
-    if (step.length > 1) {
-      transformStep.mode =
-        parseInt(step.charAt(1), 10) === 1 ? ENCRYPT : DECRYPT;
+    let transformFunc;
+    if (parseInt(step.charAt(1), 10) === 1) {
+      transformFunc = (data) => {
+        return encode(CIPHERS[step.charAt(0)], data);
+      };
+    } else {
+      transformFunc = (data) => {
+        return decode(CIPHERS[step.charAt(0)], data);
+      };
     }
-    transformSteps.push(transformStep);
+    transformSteps.push(transformFunc);
   });
 
   return transformSteps;
