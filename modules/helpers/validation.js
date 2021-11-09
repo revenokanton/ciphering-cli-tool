@@ -6,8 +6,8 @@ const {
   ARGS,
   PATTERNS,
 } = require("../constants");
-const { errorHandler } = require("./error_handler");
-const { getConfig, getInputFile, getOutputFile } = require("./args");
+const { handleError } = require("./error_handler");
+const { getConfig, getInputFilePath, getOutputFilePath } = require("./args");
 
 /**
  * Checking if config pattern is valid
@@ -15,7 +15,7 @@ const { getConfig, getInputFile, getOutputFile } = require("./args");
 const checkConfigPatter = (steps) => {
   steps.forEach((step) => {
     if (!PATTERNS.includes(step)) {
-      errorHandler(new Error("There are invalid config properties"));
+      handleError(new Error("There are invalid config properties"));
     }
   });
 };
@@ -25,7 +25,7 @@ const checkConfigPatter = (steps) => {
  */
 const checkMultipleArgs = (argNames) => {
   if (ARGS.filter((item) => argNames.includes(item)).length > 1) {
-    errorHandler(new Error(`There are multiple ${argNames[1]} arguments`));
+    handleError(new Error(`There are multiple ${argNames[1]} arguments`));
   }
 };
 
@@ -37,21 +37,21 @@ const validateArgs = () => {
   if (configValue) {
     checkConfigPatter(configValue);
   } else {
-    errorHandler(
-      new Error("There is no the following required argument: --config")
+    handleError(
+      new Error("Please add a required config argument: -c | --config")
     );
   }
 
-  const inputFile = getInputFile();
+  const inputFile = getInputFilePath();
 
   if (inputFile) {
-    fs.access(inputFile, fs.constants.R_OK, (err) => errorHandler(err));
+    fs.access(inputFile, fs.constants.R_OK, (err) => handleError(err));
   }
 
-  const outputFile = getOutputFile();
+  const outputFile = getOutputFilePath();
 
   if (outputFile) {
-    fs.access(outputFile, fs.constants.W_OK, (err) => errorHandler(err));
+    fs.access(outputFile, fs.constants.W_OK, (err) => handleError(err));
   }
 
   const arr = [CONFIG, OUTPUT_FILE, INPUT_FILE];

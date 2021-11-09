@@ -1,16 +1,15 @@
 /**
- * Handle error as follows: we write the error message in process.stderr and
- * stop the process with code 1.
+ * Common error handler
  *
- * @param err - Error object, which describe occurred error.
+ * @param err - Error object with the following message
  */
-const errorHandler = (err) => {
+const handleError = (err) => {
   if (err) {
-    process.stderr.write(err.message + "\n");
+    process.stderr.write(`${err.message}`);
     process.exit(1);
   }
 };
 
 module.exports = {
-  errorHandler,
+  handleError,
 };

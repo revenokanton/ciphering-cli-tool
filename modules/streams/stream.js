@@ -1,4 +1,4 @@
-const { getInputFile, getOutputFile } = require("../helpers/args");
+const { getInputFilePath, getOutputFilePath } = require("../helpers/args");
 const fs = require("fs");
 const path = require("path");
 
@@ -8,7 +8,7 @@ const path = require("path");
  * @returns {*} - Read stream or stdin
  */
 const getReadStream = () => {
-  const input = getInputFile();
+  const input = getInputFilePath();
   return input ? fs.createReadStream(path.join(input)) : process.stdin;
 };
 
@@ -18,7 +18,7 @@ const getReadStream = () => {
  * @returns {*} - Write stream or stdout
  */
 const getWriteStream = () => {
-  const output = getOutputFile();
+  const output = getOutputFilePath();
   return output
     ? fs.createWriteStream(path.join(output), { flags: "w+" })
     : process.stdout;

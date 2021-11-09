@@ -2,7 +2,7 @@ const stream = require("stream");
 const { encode, decode, caesar, rot8, atbash } = require("../ciphers/cipher");
 const { CESAR, ROT8, ATBASH } = require("../constants");
 
-module.exports = class CryptoTransformStream extends stream.Transform {
+class CryptoTransformStream extends stream.Transform {
   constructor(step) {
     super();
     this.algorithm = this.getTransAlg(step.charAt(0));
@@ -33,4 +33,8 @@ module.exports = class CryptoTransformStream extends stream.Transform {
       }
     }
   }
+}
+
+module.exports = {
+  CryptoTransformStream,
 };

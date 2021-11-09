@@ -5,7 +5,7 @@ const { CONFIG, INPUT_FILE, OUTPUT_FILE, ARGS } = require("../constants");
  * with provided arg names
  *
  * @param argNames variety of arg name
- * @returns {*} - Arg parameter value or null
+ * @returns {(string|null)} - Arg parameter value or null
  */
 const getValueFromArgs = (argNames) => {
   const configIndex = ARGS.findIndex(
@@ -20,37 +20,34 @@ const getValueFromArgs = (argNames) => {
 };
 
 /**
- * Obtain a config for cipher. If user did not assign the
- * value to the console argument <--config>, then we return <undefined>.
+ * Return config value from args
  *
- * @returns {*} - A path to an input file or <undefined>
+ * @returns {string[]} - Config value
  */
 const getConfig = () => {
   return getValueFromArgs(CONFIG).split("-");
 };
 
 /**
- * Obtain a path to an input file. If user did not assign the
- * value to the console argument <--input>, then we return <undefined>.
+ * Return input file path
  *
- * @returns {*} - A path to an input file or <undefined>
+ * @returns {(string|null)} - Input file path
  */
-const getInputFile = () => {
+const getInputFilePath = () => {
   return getValueFromArgs(INPUT_FILE);
 };
 
 /**
- * Obtain a path to an output file. If user did not assign the
- * value to the console argument <--output>, then we return <undefined>.
+ * Return output file path
  *
- * @returns {*} - A path to an output file or <undefined>
+ * @returns {(string|null)} - Output file path
  */
-const getOutputFile = () => {
+const getOutputFilePath = () => {
   return getValueFromArgs(OUTPUT_FILE);
 };
 
 module.exports = {
   getConfig,
-  getInputFile,
-  getOutputFile,
+  getInputFilePath,
+  getOutputFilePath,
 };

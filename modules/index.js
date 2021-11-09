@@ -1,9 +1,9 @@
 const util = require("util");
 const stream = require("stream");
 const { getReadStream, getWriteStream } = require("./streams/stream");
-const CryptoTransformStream = require("./streams/transform");
+const { CryptoTransformStream } = require("./streams/transform");
 const { getConfig } = require("./helpers/args");
-const { errorHandler } = require("./helpers/error_handler");
+const { handleError } = require("./helpers/error_handler");
 
 const startApp = async () => {
   const pipeline = util.promisify(stream.pipeline);
@@ -18,7 +18,7 @@ const startApp = async () => {
     await pipeline(getReadStream(), ...transformers, getWriteStream());
     console.log("Text was successfully transformed");
   } catch (err) {
-    errorHandler(err);
+    handleError(err);
   }
 };
 
