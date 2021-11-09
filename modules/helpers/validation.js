@@ -25,7 +25,7 @@ const checkConfigPatter = (steps) => {
  */
 const checkMultipleArgs = (argNames) => {
   if (ARGS.filter((item) => argNames.includes(item)).length > 1) {
-    handleError(new Error(`There are multiple ${argNames[1]} arguments`));
+    handleError(new Error(`Please remove multiple ${argNames[1]} arguments`));
   }
 };
 

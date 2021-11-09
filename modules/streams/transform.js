@@ -1,12 +1,17 @@
 const stream = require("stream");
-const { encode, decode, caesar, rot8, atbash } = require("../ciphers/cipher");
+const {
+  encode,
+  decode,
+  ciphers,
+  getCipherPeriod,
+} = require("../ciphers/utils");
 const { CESAR, ROT8, ATBASH } = require("../constants");
 
 class CryptoTransformStream extends stream.Transform {
-  constructor(step) {
+  constructor(step = "A") {
     super();
-    this.algorithm = this.getTransAlg(step.charAt(0));
-    this.shift = parseInt(step.charAt(1), 10);
+    this.algorithm = CryptoTransformStream.getAlgorithm(step.charAt(0));
+    this.shift = parseInt(step.charAt(1), 10) ? 1 : -1;
   }
 
   _transform(data, encoding, callback) {
@@ -15,21 +20,34 @@ class CryptoTransformStream extends stream.Transform {
       this.shift === 1
         ? encode(this.algorithm, stringData)
         : decode(this.algorithm, stringData);
+
     this.push(func);
 
     callback();
   }
 
-  getTransAlg(step) {
+  static caesarCipher(shift) {
+    return ciphers(
+      (codeNum) => getCipherPeriod(26, codeNum + shift),
+      (codeNum) => getCipherPeriod(26, codeNum - shift)
+    );
+  }
+
+  static atbashCipher() {
+    const cipher = (codeNum) => 25 - codeNum;
+    return ciphers(cipher, cipher);
+  }
+
+  static getAlgorithm(step) {
     switch (step) {
       case CESAR: {
-        return caesar(1);
+        return CryptoTransformStream.caesarCipher(1);
       }
       case ROT8: {
-        return rot8;
+        return CryptoTransformStream.caesarCipher(8);
       }
       case ATBASH: {
-        return atbash;
+        return CryptoTransformStream.atbashCipher();
       }
     }
   }
