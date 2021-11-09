@@ -7,10 +7,9 @@ CLI tool for encoding and decoding a text by 3 substitution ciphers:
 
 ###Installation
 
-You will need Node `>=14.17.0 <15` and NPM `>=7.15.0` installed locally.
+You will need Node `>=14.17.0` and NPM installed locally.
 
 Open the project
-
 ```
 cd ciphering-cli-tool
 ```
