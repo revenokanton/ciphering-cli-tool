@@ -12,9 +12,7 @@ const { getConfig, getInputFile, getOutputFile } = require("./args");
 /**
  * Checking if config pattern is valid
  */
-const checkConfigPatter = (configValue) => {
-  const steps = configValue.split("-");
-
+const checkConfigPatter = (steps) => {
   steps.forEach((step) => {
     if (!PATTERNS.includes(step)) {
       errorHandler(new Error("There are invalid config properties"));

@@ -26,7 +26,7 @@ const getValueFromArgs = (argNames) => {
  * @returns {*} - A path to an input file or <undefined>
  */
 const getConfig = () => {
-  return getValueFromArgs(CONFIG);
+  return getValueFromArgs(CONFIG).split("-");
 };
 
 /**
