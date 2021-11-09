@@ -2,7 +2,7 @@ const stream = require("stream");
 const {
   encode,
   decode,
-  ciphers,
+  cipherModes,
   getCipherPeriod,
 } = require("../ciphers/utils");
 const { CESAR, ROT8, ATBASH } = require("../constants");
@@ -27,7 +27,7 @@ class CryptoTransformStream extends stream.Transform {
   }
 
   static caesarCipher(shift) {
-    return ciphers(
+    return cipherModes(
       (codeNum) => getCipherPeriod(26, codeNum + shift),
       (codeNum) => getCipherPeriod(26, codeNum - shift)
     );
@@ -35,7 +35,7 @@ class CryptoTransformStream extends stream.Transform {
 
   static atbashCipher() {
     const cipher = (codeNum) => 25 - codeNum;
-    return ciphers(cipher, cipher);
+    return cipherModes(cipher, cipher);
   }
 
   static getAlgorithm(step) {

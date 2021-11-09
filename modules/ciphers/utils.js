@@ -5,12 +5,12 @@
  *
  * @returns {*} - Object with encode/decode
  */
-const ciphers = (encode, decode) => ({ encode, decode });
+const cipherModes = (encode, decode) => ({ encode, decode });
 
 /**
  * Return cipher period
  */
-const getCipherPeriod = (z, n) => (z + (n % z)) % z;
+const getCipherPeriod = (del, shiftedNum) => (del + (shiftedNum % del)) % del;
 
 /**
  * Filter symbols outside from latin alphabet
@@ -39,9 +39,9 @@ const convertToCode = (str) => str.charCodeAt(0);
  * Compose algorithms
  */
 const compose =
-  (...fs) =>
-  (x) =>
-    fs.reduce((r, f) => f(r), x);
+  (...arr) =>
+  (i) =>
+    arr.reduce((prop, func) => func(prop), i);
 
 /**
  * Transform string
@@ -63,7 +63,7 @@ const encode = (cipher, str) => transformData(cipher.encode, str);
 const decode = (cipher, str) => transformData(cipher.decode, str);
 
 module.exports = {
-  ciphers,
+  cipherModes,
   getCipherPeriod,
   encode,
   decode,
