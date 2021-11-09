@@ -6,13 +6,19 @@ const CONFIG = ["-c", "--config"];
 const INPUT_FILE = ["-i", "--input"];
 const OUTPUT_FILE = ["-o", "--output"];
 
-// Patterns
-const PATTERNS = ["C0", "C1", "R0", "R1", "A"];
-
 // Ciphers
 const CESAR = "C";
 const ROT8 = "R";
 const ATBASH = "A";
+
+// Patterns
+const PATTERNS = [
+  `${CESAR}0`,
+  `${CESAR}1`,
+  `${ROT8}0`,
+  `${ROT8}1`,
+  `${ATBASH}`,
+];
 
 module.exports = {
   ARGS,
