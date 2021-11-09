@@ -2,13 +2,13 @@ const util = require("util");
 const stream = require("stream");
 const { getReadStream, getWriteStream } = require("./streams/stream");
 const { CryptoTransformStream } = require("./streams/transform");
-const { getConfig } = require("./helpers/args");
+const { getConfigProps } = require("./helpers/args");
 const { handleError } = require("./helpers/error_handler");
 
 const startApp = async () => {
   const pipeline = util.promisify(stream.pipeline);
 
-  const config = getConfig();
+  const config = getConfigProps();
 
   const transformers = config.map((cipher) => {
     return new CryptoTransformStream(cipher);

@@ -7,7 +7,11 @@ const {
   PATTERNS,
 } = require("../constants");
 const { handleError } = require("./error_handler");
-const { getConfig, getInputFilePath, getOutputFilePath } = require("./args");
+const {
+  getConfigProps,
+  getInputFilePath,
+  getOutputFilePath,
+} = require("./args");
 
 /**
  * Checking if config pattern is valid
@@ -32,8 +36,8 @@ const checkMultipleArgs = (argNames) => {
 /**
  * Checking of the console arguments
  */
-const validateArgs = () => {
-  const configValue = getConfig();
+const validateAppArgs = () => {
+  const configValue = getConfigProps();
   if (configValue) {
     checkConfigPatter(configValue);
   } else {
@@ -62,5 +66,5 @@ const validateArgs = () => {
 };
 
 module.exports = {
-  validateArgs,
+  validateAppArgs,
 };

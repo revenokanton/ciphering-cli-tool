@@ -1,6 +1,6 @@
 const startApp = require("./modules/index");
-const { validateArgs } = require("./modules/helpers/validation");
+const { validateAppArgs } = require("./modules/helpers/validation");
 
-validateArgs();
+validateAppArgs();
 
 startApp();

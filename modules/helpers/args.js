@@ -24,7 +24,7 @@ const getValueFromArgs = (argNames) => {
  *
  * @returns {string[]} - Config value
  */
-const getConfig = () => {
+const getConfigProps = () => {
   return getValueFromArgs(CONFIG).split("-");
 };
 
@@ -47,7 +47,7 @@ const getOutputFilePath = () => {
 };
 
 module.exports = {
-  getConfig,
+  getConfigProps,
   getInputFilePath,
   getOutputFilePath,
 };
