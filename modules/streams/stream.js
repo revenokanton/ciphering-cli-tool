@@ -9,19 +9,26 @@ const path = require("path");
  */
 const getReadStream = () => {
   const input = getInputFilePath();
-  return input ? fs.createReadStream(path.join(input)) : process.stdin;
+  if (input) {
+    return fs.createReadStream(path.join(input));
+  } else {
+    console.log("Enter text:");
+    return process.stdin;
+  }
 };
 
 /**
  * Return write stream
- *
+
  * @returns {*} - Write stream or stdout
  */
 const getWriteStream = () => {
   const output = getOutputFilePath();
-  return output
-    ? fs.createWriteStream(path.join(output), { flags: "w+" })
-    : process.stdout;
+  if (output) {
+    return fs.createWriteStream(path.join(output), { flags: "w+" });
+  } else {
+    return process.stdout;
+  }
 };
 
 module.exports = {
