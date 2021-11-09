@@ -19,6 +19,7 @@ const startApp = async () => {
 
   try {
     await pipeline(getReadStream(), ...transformers, getWriteStream());
+
     console.log(
       `Text was successfully transformed according provided steps: ${config.join(
         "-"
