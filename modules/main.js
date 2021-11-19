@@ -23,7 +23,7 @@ const startApp = async ({ args }) => {
     console.log(
       `Text was successfully transformed according provided steps: ${config.join(
         "-"
-      )} \nPlease check output file`
+      )}`
     );
   } catch (err) {
     handleError(err);
