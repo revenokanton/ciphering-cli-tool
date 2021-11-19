@@ -27,6 +27,7 @@ describe("modules / ciphers / utils / getCipherPeriod", () => {
 });
 
 describe("modules / ciphers / utils / filterSymbols", () => {
+  jest.clearAllMocks();
   const mockCallback = jest.fn((x) => 42 + x);
   const codes = Array.from(Array(255).keys());
 
@@ -46,6 +47,7 @@ describe("modules / ciphers / utils / filterSymbols", () => {
 describe("modules / ciphers / utils / convertFromCode", () => {
   const codes = Array.from(Array(255).keys());
   test.each(codes)("should convert from char", (code) => {
+    jest.clearAllMocks();
     const mockCallback = jest.fn((x) => String.fromCharCode(x));
     expect(convertFromCode(code)).toEqual(mockCallback(code));
   });
@@ -53,6 +55,7 @@ describe("modules / ciphers / utils / convertFromCode", () => {
 
 describe("modules / ciphers / utils / convertToCode", () => {
   test("should convert to char", () => {
+    jest.clearAllMocks();
     const char = "A";
     const mockCallback = jest.fn((str) => str.charCodeAt(0));
     expect(convertToCode(char)).toEqual(mockCallback(char));
@@ -61,6 +64,7 @@ describe("modules / ciphers / utils / convertToCode", () => {
 
 describe("modules / ciphers / utils / compose", () => {
   test("should convert to char", () => {
+    jest.clearAllMocks();
     const mockCallback = jest.fn((x) => 42 + x);
     const mockConvertToCode = jest.fn((str) => str.charCodeAt(0));
     const mockConvertFromCode = jest.fn((x) => String.fromCharCode(x));
@@ -76,6 +80,7 @@ describe("modules / ciphers / utils / compose", () => {
 
 describe("modules / ciphers / utils / transformData", () => {
   test("should convert to char", () => {
+    jest.clearAllMocks();
     const mockCallback = jest.fn((x) => 42 + x);
     expect(transformData(mockCallback, "A")).toEqual("k");
   });
@@ -83,6 +88,7 @@ describe("modules / ciphers / utils / transformData", () => {
 
 describe("modules / ciphers / utils / decode", () => {
   test("should convert to char", () => {
+    jest.clearAllMocks();
     const mockCallback = { decode: jest.fn((x) => 42 + x) };
     expect(decode(mockCallback, "A")).toEqual("k");
   });
@@ -90,6 +96,7 @@ describe("modules / ciphers / utils / decode", () => {
 
 describe("modules / ciphers / utils / encode", () => {
   test("should convert to char", () => {
+    jest.clearAllMocks();
     const mockCallback = { encode: jest.fn((x) => 42 + x) };
     expect(encode(mockCallback, "A")).toEqual("k");
   });
