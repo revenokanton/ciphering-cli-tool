@@ -40,8 +40,8 @@ describe("modules / helpers / args / getInputFilePath", () => {
 
 describe("modules / helpers / args / getOutputFilePath", () => {
   it("should work with args", () => {
-    expect(getOutputFilePath(["-o", "fixtures/test_output.txt"])).toEqual(
-      "fixtures/test_output.txt"
+    expect(getOutputFilePath(["-o", "fixtures/test_unit_output.txt"])).toEqual(
+      "fixtures/test_unit_output.txt"
     );
   });
   it("should work with wrong args", () => {

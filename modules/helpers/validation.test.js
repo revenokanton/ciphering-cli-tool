@@ -37,7 +37,7 @@ describe("modules / helpers / validation / checkMultipleArgs", () => {
           "-i",
           "fixtures/test_input.txt",
           "-o",
-          "fixtures/test_output.txt",
+          "fixtures/test_unit_output.txt",
         ]
       );
     }).not.toThrow();
@@ -68,7 +68,7 @@ describe("modules / helpers / validation / validateAppArgs", () => {
         "-i",
         "fixtures/test_input.txt",
         "-o",
-        "fixtures/test_output.txt",
+        "fixtures/test_unit_output.txt",
       ]);
     }).not.toThrow();
   });

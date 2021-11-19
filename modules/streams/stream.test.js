@@ -20,7 +20,7 @@ describe("modules / streams / stream / getReadStream", () => {
 describe("modules / streams / stream / getReadStream", () => {
   it("should return read stream", () => {
     expect(() => {
-      getWriteStream(["-c", "C1-C0", "-o", "fixtures/test_output.txt"]);
+      getWriteStream(["-c", "C1-C0", "-o", "fixtures/test_unit_output.txt"]);
     }).not.toThrow();
   });
   it("should return stdin if no error", () => {

@@ -12,7 +12,7 @@ describe("modules / main", () => {
         "-i",
         "fixtures/test_input.txt",
         "-o",
-        "fixtures/test_output.txt",
+        "fixtures/test_unit_output.txt",
       ],
     });
     expect(logSpy.mock.calls).toEqual([

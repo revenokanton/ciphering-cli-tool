@@ -5,7 +5,7 @@
   "main": "my_ciphering_cli.js",
   "scripts": {
     "test": "jest --coverage",
-    "test:integration": "jest integration/*.test.js"
+    "autotest": "jest integration/*.test.js"
   },
   "repository": {
     "type": "git",
