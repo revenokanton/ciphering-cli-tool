@@ -43,13 +43,21 @@ const validateAppArgs = (args) => {
   const inputFile = getInputFilePath(args);
 
   if (inputFile) {
-    fs.access(inputFile, fs.constants.R_OK, (err) => handleError(err));
+    try {
+      fs.accessSync(inputFile, fs.constants.R_OK);
+    } catch (error) {
+      handleError(error);
+    }
   }
 
   const outputFile = getOutputFilePath(args);
 
   if (outputFile) {
-    fs.access(outputFile, fs.constants.W_OK, (err) => handleError(err));
+    try {
+      fs.accessSync(outputFile, fs.constants.W_OK);
+    } catch (error) {
+      handleError(error);
+    }
   }
 
   const arr = [CONFIG, OUTPUT_FILE, INPUT_FILE];
@@ -61,4 +69,6 @@ const validateAppArgs = (args) => {
 
 module.exports = {
   validateAppArgs,
+  checkConfigPatter,
+  checkMultipleArgs,
 };

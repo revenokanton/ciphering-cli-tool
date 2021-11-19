@@ -2,7 +2,7 @@ const { expect } = require("@jest/globals");
 const { handleError } = require("./error_handler");
 
 describe("modules / helpers / error_handler / handleError", () => {
-  test("should show proper error message", () => {
+  it("should show proper error message", () => {
     jest.clearAllMocks();
     const spy = jest.spyOn(process.stderr, "write");
     jest.spyOn(process, "exit").mockImplementationOnce(() => {
@@ -15,7 +15,7 @@ describe("modules / helpers / error_handler / handleError", () => {
     expect(process.exit).toHaveBeenCalledWith(1);
   });
 
-  test("should work without args", () => {
+  it("should work without args", () => {
     expect(() => {
       handleError(null);
     }).not.toThrow();
