@@ -67,4 +67,9 @@ module.exports = {
   getCipherPeriod,
   encode,
   decode,
+  filterSymbols,
+  convertFromCode,
+  convertToCode,
+  compose,
+  transformData,
 };
