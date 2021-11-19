@@ -24,7 +24,7 @@ const getValueFromArgs = (argNames, args) => {
  * @returns {string[]} - Config value
  */
 const getConfigProps = (args) => {
-  return getValueFromArgs(CONFIG, args).split("-");
+  return getValueFromArgs(CONFIG, args)?.split("-");
 };
 
 /**
