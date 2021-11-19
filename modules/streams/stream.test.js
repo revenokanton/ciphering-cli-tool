@@ -1,12 +1,10 @@
 const { expect } = require("@jest/globals");
 const { getReadStream, getWriteStream } = require("./stream");
-const fs = require("fs");
-const path = require("path");
 
 describe("modules / streams / stream / getReadStream", () => {
   it("should return read stream", () => {
     expect(() => {
-      getReadStream(["-c", "C1-C0", "-i", "input.txt"]);
+      getReadStream(["-c", "C1-C0", "-i", "fixtures/test_input.txt"]);
     }).not.toThrow();
   });
   it("should return stdin if no error", () => {
@@ -22,7 +20,7 @@ describe("modules / streams / stream / getReadStream", () => {
 describe("modules / streams / stream / getReadStream", () => {
   it("should return read stream", () => {
     expect(() => {
-      getWriteStream(["-c", "C1-C0", "-o", "output.txt"]);
+      getWriteStream(["-c", "C1-C0", "-o", "fixtures/test_output.txt"]);
     }).not.toThrow();
   });
   it("should return stdin if no error", () => {

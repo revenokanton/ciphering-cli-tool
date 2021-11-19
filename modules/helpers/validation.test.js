@@ -31,7 +31,14 @@ describe("modules / helpers / validation / checkMultipleArgs", () => {
     expect(() => {
       checkMultipleArgs(
         ["-c", "--config"],
-        ["-c", "C0", "-i", "input.txt", "-o", "output.txt"]
+        [
+          "-c",
+          "C0",
+          "-i",
+          "fixtures/test_input.txt",
+          "-o",
+          "fixtures/test_output.txt",
+        ]
       );
     }).not.toThrow();
   });
@@ -55,7 +62,14 @@ describe("modules / helpers / validation / checkMultipleArgs", () => {
 describe("modules / helpers / validation / validateAppArgs", () => {
   it("should work with proper args", () => {
     expect(() => {
-      validateAppArgs(["-c", "C0", "-i", "input.txt", "-o", "output.txt"]);
+      validateAppArgs([
+        "-c",
+        "C0",
+        "-i",
+        "fixtures/test_input.txt",
+        "-o",
+        "fixtures/test_output.txt",
+      ]);
     }).not.toThrow();
   });
 

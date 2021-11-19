@@ -29,7 +29,9 @@ describe("modules / helpers / args / getConfigProps", () => {
 
 describe("modules / helpers / args / getInputFilePath", () => {
   it("should work with args", () => {
-    expect(getInputFilePath(["-i", "input.txt"])).toEqual("input.txt");
+    expect(getInputFilePath(["-i", "fixtures/test_input.txt"])).toEqual(
+      "fixtures/test_input.txt"
+    );
   });
   it("should work with wrong args", () => {
     expect(getInputFilePath([])).toEqual(null);
@@ -38,7 +40,9 @@ describe("modules / helpers / args / getInputFilePath", () => {
 
 describe("modules / helpers / args / getOutputFilePath", () => {
   it("should work with args", () => {
-    expect(getOutputFilePath(["-o", "output.txt"])).toEqual("output.txt");
+    expect(getOutputFilePath(["-o", "fixtures/test_output.txt"])).toEqual(
+      "fixtures/test_output.txt"
+    );
   });
   it("should work with wrong args", () => {
     expect(getOutputFilePath([])).toEqual(null);
