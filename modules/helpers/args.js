@@ -1,14 +1,13 @@
-const { CONFIG, INPUT_FILE, OUTPUT_FILE, ARGS } = require("../constants");
+const { CONFIG, INPUT_FILE, OUTPUT_FILE } = require("../constants");
 
 /**
  * Return parsed parameter from using provided args
  * with provided arg names
  *
- * @param argNames variety of arg name
  * @returns {(string|null)} - Arg parameter value or null
  */
-const getValueFromArgs = (argNames) => {
-  const configIndex = ARGS.findIndex(
+const getValueFromArgs = (argNames, args) => {
+  const configIndex = args.findIndex(
     (i) => i === argNames[0] || i === argNames[1]
   );
 
@@ -16,7 +15,7 @@ const getValueFromArgs = (argNames) => {
     return null;
   }
 
-  return ARGS[configIndex + 1] ? ARGS[configIndex + 1] : null;
+  return args[configIndex + 1] ? args[configIndex + 1] : null;
 };
 
 /**
@@ -24,8 +23,8 @@ const getValueFromArgs = (argNames) => {
  *
  * @returns {string[]} - Config value
  */
-const getConfigProps = () => {
-  return getValueFromArgs(CONFIG).split("-");
+const getConfigProps = (args) => {
+  return getValueFromArgs(CONFIG, args).split("-");
 };
 
 /**
@@ -33,8 +32,8 @@ const getConfigProps = () => {
  *
  * @returns {(string|null)} - Input file path
  */
-const getInputFilePath = () => {
-  return getValueFromArgs(INPUT_FILE);
+const getInputFilePath = (args) => {
+  return getValueFromArgs(INPUT_FILE, args);
 };
 
 /**
@@ -42,12 +41,13 @@ const getInputFilePath = () => {
  *
  * @returns {(string|null)} - Output file path
  */
-const getOutputFilePath = () => {
-  return getValueFromArgs(OUTPUT_FILE);
+const getOutputFilePath = (args) => {
+  return getValueFromArgs(OUTPUT_FILE, args);
 };
 
 module.exports = {
   getConfigProps,
   getInputFilePath,
   getOutputFilePath,
+  getValueFromArgs,
 };

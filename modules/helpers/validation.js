@@ -1,11 +1,5 @@
 const fs = require("fs");
-const {
-  CONFIG,
-  OUTPUT_FILE,
-  INPUT_FILE,
-  ARGS,
-  PATTERNS,
-} = require("../constants");
+const { CONFIG, OUTPUT_FILE, INPUT_FILE, PATTERNS } = require("../constants");
 const { handleError } = require("./error_handler");
 const {
   getConfigProps,
@@ -27,8 +21,8 @@ const checkConfigPatter = (steps) => {
 /**
  * Checking if there are any multiplied arguments
  */
-const checkMultipleArgs = (argNames) => {
-  if (ARGS.filter((item) => argNames.includes(item)).length > 1) {
+const checkMultipleArgs = (argNames, args) => {
+  if (args.filter((item) => argNames.includes(item)).length > 1) {
     handleError(new Error(`Please remove multiple ${argNames[1]} arguments`));
   }
 };
@@ -36,8 +30,8 @@ const checkMultipleArgs = (argNames) => {
 /**
  * Checking of the console arguments
  */
-const validateAppArgs = () => {
-  const configValue = getConfigProps();
+const validateAppArgs = (args) => {
+  const configValue = getConfigProps(args);
   if (configValue) {
     checkConfigPatter(configValue);
   } else {
@@ -46,13 +40,13 @@ const validateAppArgs = () => {
     );
   }
 
-  const inputFile = getInputFilePath();
+  const inputFile = getInputFilePath(args);
 
   if (inputFile) {
     fs.access(inputFile, fs.constants.R_OK, (err) => handleError(err));
   }
 
-  const outputFile = getOutputFilePath();
+  const outputFile = getOutputFilePath(args);
 
   if (outputFile) {
     fs.access(outputFile, fs.constants.W_OK, (err) => handleError(err));
@@ -61,7 +55,7 @@ const validateAppArgs = () => {
   const arr = [CONFIG, OUTPUT_FILE, INPUT_FILE];
 
   arr.forEach((argNames) => {
-    checkMultipleArgs(argNames);
+    checkMultipleArgs(argNames, args);
   });
 };
 

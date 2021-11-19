@@ -4,7 +4,7 @@
   "description": "CLI tool that will encode and decode a text by 3 substitution ciphers",
   "main": "my_ciphering_cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:unit": "jest --coverage"
   },
   "repository": {
     "type": "git",
