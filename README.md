@@ -44,3 +44,15 @@ CLI tool accept 3 options:
 ```
 node my_ciphering_cli -c "C1-C1-R0-A" -i "./input.txt" -o "./output.txt"
 ```
+
+##Testing CLI
+
+```
+npm test
+```
+
+###Integration tests
+
+```
+npm run autotest
+```
