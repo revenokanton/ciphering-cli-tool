@@ -4,7 +4,8 @@
   "description": "CLI tool that will encode and decode a text by 3 substitution ciphers",
   "main": "my_ciphering_cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage",
+    "autotest": "jest integration/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/revenokanton/ciphering-cli-tool#readme",
   "devDependencies": {
     "eslint": "^8.2.0",
+    "jest": "^27.3.1",
     "prettier": "2.4.1"
   }
 }

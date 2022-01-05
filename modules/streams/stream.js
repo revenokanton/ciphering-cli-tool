@@ -7,8 +7,8 @@ const path = require("path");
  *
  * @returns {*} - Read stream or stdin
  */
-const getReadStream = () => {
-  const input = getInputFilePath();
+const getReadStream = (args) => {
+  const input = getInputFilePath(args);
   if (input) {
     return fs.createReadStream(path.join(input));
   } else {
@@ -22,8 +22,8 @@ const getReadStream = () => {
 
  * @returns {*} - Write stream or stdout
  */
-const getWriteStream = () => {
-  const output = getOutputFilePath();
+const getWriteStream = (args) => {
+  const output = getOutputFilePath(args);
   if (output) {
     return fs.createWriteStream(path.join(output), { flags: "w+" });
   } else {
