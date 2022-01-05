@@ -1,0 +1,29 @@
+{
+  "name": "ciphering-cli-tool",
+  "version": "1.0.0",
+  "description": "CLI tool that will encode and decode a text by 3 substitution ciphers",
+  "main": "my_ciphering_cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revenokanton/ciphering-cli-tool.git"
+  },
+  "bin": {
+    "my_ciphering_cli": "./my_ciphering_cli.js"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Anton Revenok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/revenokanton/ciphering-cli-tool/issues"
+  },
+  "homepage": "https://github.com/revenokanton/ciphering-cli-tool#readme",
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "prettier": "2.4.1"
+  }
+}
